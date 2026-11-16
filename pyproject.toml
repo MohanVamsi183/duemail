@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mail2cal"
+version = "0.1.0"
+description = "Turn deadlines in your Gmail into Google Calendar events, styled by Gmail label."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "google-api-python-client>=2.100",
+    "google-auth-oauthlib>=1.1",
+    "python-dateutil>=2.8",
+    "PyYAML>=6.0",
+    "tzlocal>=5.0",
+    "tzdata; platform_system == 'Windows'",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+mail2cal = "mail2cal.cli:main"
+
+[tool.setuptools]
+packages = ["mail2cal"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
