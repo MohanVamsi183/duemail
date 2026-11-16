@@ -1,4 +1,4 @@
-# mail2cal
+# duemail
 
 Turn deadlines buried in your Gmail into Google Calendar events.
 
@@ -21,7 +21,7 @@ Needs Python 3.10+.
 
 ```
 pip install .            # from this folder
-mail2cal init            # creates ~/.mail2cal/config.yaml
+duemail init            # creates ~/.duemail/config.yaml
 ```
 
 ## Google setup (once per person, about 5 minutes)
@@ -35,9 +35,9 @@ other people" below), so this is the dependable route.
 3. In **APIs & Services > OAuth consent screen**, choose **External**, fill in the
    app name and your email, and add your own Gmail address as a **test user**.
 4. In **Credentials > Create credentials > OAuth client ID**, pick **Desktop app**.
-   Download the JSON and save it as `~/.mail2cal/credentials.json`
-   (Windows: `C:\Users\<you>\.mail2cal\credentials.json`).
-5. Run `mail2cal auth`. A browser opens; sign in and allow access.
+   Download the JSON and save it as `~/.duemail/credentials.json`
+   (Windows: `C:\Users\<you>\.duemail\credentials.json`).
+5. Run `duemail auth`. A browser opens; sign in and allow access.
 
 **Avoid signing in again every week:** while the consent screen is in
 *Testing* status, Google expires the sign-in after 7 days. Set the publishing
@@ -47,26 +47,26 @@ see an "unverified app" warning once when signing in) and the sign-in lasts.
 ## Use
 
 ```
-mail2cal run --dry-run     # show what would be added, change nothing
-mail2cal run               # add events for new deadlines
-mail2cal run --days 14     # look further back the first time
-mail2cal watch             # keep running, check every 15 minutes
-mail2cal labels            # list your Gmail labels
-mail2cal test "Please submit the form by Dec 3 at 5pm"   # try the detector
+duemail run --dry-run     # show what would be added, change nothing
+duemail run               # add events for new deadlines
+duemail run --days 14     # look further back the first time
+duemail watch             # keep running, check every 15 minutes
+duemail labels            # list your Gmail labels
+duemail test "Please submit the form by Dec 3 at 5pm"   # try the detector
 ```
 
-Mails are remembered in `~/.mail2cal/state.db`, so running again never creates
+Mails are remembered in `~/.duemail/state.db`, so running again never creates
 duplicates. Delete that file to start over.
 
 ### Run it automatically
 
 - **Windows** – Task Scheduler > Create Basic Task > trigger "Daily", repeat
-  every 30 minutes > action "Start a program": `mail2cal` with argument `run`.
+  every 30 minutes > action "Start a program": `duemail` with argument `run`.
 - **macOS / Linux** – `crontab -e` and add
-  `*/30 * * * * mail2cal run >> ~/.mail2cal/log.txt 2>&1`
-  (use the full path from `which mail2cal`).
+  `*/30 * * * * duemail run >> ~/.duemail/log.txt 2>&1`
+  (use the full path from `which duemail`).
 
-## Configure (`~/.mail2cal/config.yaml`)
+## Configure (`~/.duemail/config.yaml`)
 
 ```yaml
 scan:
@@ -137,10 +137,10 @@ pip install -e ".[dev]"
 pytest
 ```
 
-- `mail2cal/extract.py` – deadline detection rules (add patterns here)
-- `mail2cal/llm.py` – optional AI extractor
-- `mail2cal/google_api.py` – Gmail and Calendar calls
-- `mail2cal/core.py` – config, label rules, event building, the run loop
-- `mail2cal/cli.py` – commands
+- `duemail/extract.py` – deadline detection rules (add patterns here)
+- `duemail/llm.py` – optional AI extractor
+- `duemail/google_api.py` – Gmail and Calendar calls
+- `duemail/core.py` – config, label rules, event building, the run loop
+- `duemail/cli.py` – commands
 
 MIT licence.

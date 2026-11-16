@@ -4,8 +4,8 @@ from zoneinfo import ZoneInfo
 
 import yaml
 
-from mail2cal.core import DEFAULT_CONFIG, Store, _merge, load_config, run
-from mail2cal.google_api import Mail
+from duemail.core import DEFAULT_CONFIG, Store, _merge, load_config, run
+from duemail.google_api import Mail
 
 NY = ZoneInfo("America/New_York")
 NOW = datetime(2026, 11, 16, 17, 14, tzinfo=NY)

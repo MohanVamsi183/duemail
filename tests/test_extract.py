@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from zoneinfo import ZoneInfo
 
-from mail2cal.extract import find_deadlines, html_to_text
+from duemail.extract import find_deadlines, html_to_text
 
 NY = ZoneInfo("America/New_York")
 RECEIVED = datetime(2026, 11, 16, 17, 14, tzinfo=NY)   # a Monday

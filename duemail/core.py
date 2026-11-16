@@ -12,7 +12,7 @@ import yaml
 from .extract import Deadline, find_deadlines
 
 DEFAULT_CONFIG = """\
-# mail2cal settings. Edit freely; run `mail2cal run --dry-run` to preview.
+# duemail settings. Edit freely; run `duemail run --dry-run` to preview.
 
 # IANA name like America/New_York. Leave empty to use this computer's timezone.
 timezone: ""
@@ -77,7 +77,7 @@ llm:
 
 
 def home_dir() -> Path:
-    p = Path(os.environ.get("MAIL2CAL_HOME", Path.home() / ".mail2cal"))
+    p = Path(os.environ.get("DUEMAIL_HOME", Path.home() / ".duemail"))
     p.mkdir(parents=True, exist_ok=True)
     return p
 
@@ -150,9 +150,9 @@ def build_events(mail, dl: Deadline, style: dict, now: datetime, uncertain: bool
         "Date not found in the mail - please check it." if uncertain else "",
         f"From: {mail.sender}", f"Mail: {mail.link}",
         f'Found in: "{dl.evidence.strip()[:300]}"' if dl.evidence else "",
-        "", "Added by mail2cal"]))
+        "", "Added by duemail"]))
     base = {"description": desc, "source": {"title": "Open mail", "url": mail.link},
-            "extendedProperties": {"private": {"mail2cal": mail.id}}}
+            "extendedProperties": {"private": {"duemail": mail.id}}}
     color = style.get("color")
     if color:
         from .google_api import COLORS

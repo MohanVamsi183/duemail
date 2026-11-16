@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mail2cal"
+name = "duemail"
 version = "0.1.0"
 description = "Turn deadlines in your Gmail into Google Calendar events, styled by Gmail label."
 readme = "README.md"
@@ -22,10 +22,10 @@ dependencies = [
 dev = ["pytest"]
 
 [project.scripts]
-mail2cal = "mail2cal.cli:main"
+duemail = "duemail.cli:main"
 
 [tool.setuptools]
-packages = ["mail2cal"]
+packages = ["duemail"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

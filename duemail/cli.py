@@ -1,4 +1,4 @@
-"""mail2cal command line."""
+"""duemail command line."""
 from __future__ import annotations
 
 import argparse
@@ -26,12 +26,12 @@ def cmd_init(args):
         print(f"Wrote {cfg}")
     if not (home / "credentials.json").exists():
         print(f"Next: save your Google OAuth client file as {home / 'credentials.json'} "
-              "(see README, 'Google setup'), then run: mail2cal auth")
+              "(see README, 'Google setup'), then run: duemail auth")
 
 
 def cmd_auth(args):
     gmail, _ = _services()
-    print(f"Signed in. Found {len(gmail.labels())} Gmail labels. Try: mail2cal run --dry-run")
+    print(f"Signed in. Found {len(gmail.labels())} Gmail labels. Try: duemail run --dry-run")
 
 
 def cmd_labels(args):
@@ -80,7 +80,7 @@ def cmd_test(args):
 
 
 def main(argv=None):
-    p = argparse.ArgumentParser(prog="mail2cal",
+    p = argparse.ArgumentParser(prog="duemail",
                                 description="Turn deadlines in your Gmail into Google Calendar events.")
     p.add_argument("--version", action="version", version=__version__)
     sub = p.add_subparsers(dest="cmd", required=True)
